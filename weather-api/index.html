@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- LEFT WEATHER CARD -->
+        <div class="left-card">
+            <h1 id="dayText">Monday</h1>
+            <p id="dateText">18 September 2023</p>
+
+            <img id="mainIcon" src="" alt="weather">
+
+            <h2 id="tempText">-- °C</h2>
+            <p id="conditionText">---</p>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="right-panel">
+
+            <div class="search-box">
+                <input type="text" id="cityBox" placeholder="Search location">
+                <button id="btnSearch">Search</button>
+            </div>
+
+            <div class="info">
+                <div><span>NAME</span><strong id="cityTitle">---</strong></div>
+                <div><span>TEMP</span><strong id="tempRight">---</strong></div>
+                <div><span>HUMIDITY</span><strong id="humidityText">---</strong></div>
+                <div><span>WIND SPEED</span><strong id="windText">---</strong></div>
+            </div>
+
+            <p class="error" id="errorBox">City not found</p>
+
+        </div>
+
+    </div>
+
+<script>
+
+const API_KEY = "e0c4d5ce2760ef0cd09ebe273621e906";
+const BASE_API = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+const cityBox = document.getElementById("cityBox");
+const btnSearch = document.getElementById("btnSearch");
+const errorBox = document.getElementById("errorBox");
+
+const cityTitle = document.getElementById("cityTitle");
+const tempText = document.getElementById("tempText");
+const tempRight = document.getElementById("tempRight");
+const humidityText = document.getElementById("humidityText");
+const windText = document.getElementById("windText");
+const mainIcon = document.getElementById("mainIcon");
+const conditionText = document.getElementById("conditionText");
+
+const dayText = document.getElementById("dayText");
+const dateText = document.getElementById("dateText");
+
+function updateDate() {
+    const now = new Date();
+    dayText.innerText = now.toLocaleDateString("en-US", { weekday: "long" });
+    dateText.innerText = now.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
+}
+updateDate();
+
+async function showWeather(city) {
+    try {
+        const res = await fetch(BASE_API + city + "&appid=" + API_KEY);
+        if (!res.ok) throw new Error();
+
+        const data = await res.json();
+
+        cityTitle.innerText = data.name;
+        tempText.innerText = Math.round(data.main.temp) + "°C";
+        tempRight.innerText = Math.round(data.main.temp) + "°C";
+        humidityText.innerText = data.main.humidity + "%";
+        windText.innerText = data.wind.speed + " km/h";
+        conditionText.innerText = data.weather[0].description;
+
+        mainIcon.src = selectIcon(data.weather[0].main);
+
+        errorBox.style.display = "none";
+    } catch {
+        errorBox.style.display = "block";
+    }
+}
+
+function selectIcon(type) {
+    if (type === "Clear") return "https://c.tadst.com/gfx/w/svg/wt-1.svg";
+    if (type === "Clouds") return "https://c.tadst.com/gfx/w/svg/wt-7.svg";
+    if (type === "Rain") return "https://c.tadst.com/gfx/w/svg/wt-19.svg";
+    if (type === "Snow") return "https://c.tadst.com/gfx/w/svg/wt-30.svg";
+    return "https://i.pinimg.com/originals/77/0b/80/770b805d5c99c7931366c2e84e88f251.png";
+}
+
+btnSearch.onclick = () => {
+    if (cityBox.value.trim()) showWeather(cityBox.value.trim());
+};
+
+cityBox.addEventListener("keyup", e => {
+    if (e.key === "Enter") btnSearch.click();
+});
+
+</script>
+
+</body>
+</html>

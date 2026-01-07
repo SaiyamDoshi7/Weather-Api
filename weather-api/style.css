@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: #0c1014;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Segoe UI, sans-serif;
+}
+
+.app {
+    display: flex;
+    background: #354554;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 750px;
+    height: 420px;
+}
+
+.left-card {
+    width: 40%;
+    background: linear-gradient(135deg, #3b82f6, #1e3a8a);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.left-card img {
+    width: 130px;
+    margin: 20px 0;
+}
+
+.left-card h2 {
+    font-size: 44px;
+    margin: 5px 0;
+    line-height: 1.1;
+}
+
+.left-card p {
+    margin: 0;
+    font-size: 16px;
+    opacity: 0.9;
+    text-transform: capitalize;
+}
+.left-card img {
+    width: 120px;
+    margin: 15px 0;
+}
+
+
+.right-panel {
+    width: 60%;
+    padding: 30px;
+    color: white;
+}
+
+.search-box {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px 0 0 8px;
+    border: none;
+}
+
+.search-box button {
+    padding: 10px 18px;
+    border: none;
+    background: #6366f1;
+    color: white;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+.info div {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    font-size: 15px;
+}
+
+.info span {
+    color: #9ca3af;
+}
+
+.error {
+    color: #f87171;
+    display: none;
+    margin-top: 15px;
+}
