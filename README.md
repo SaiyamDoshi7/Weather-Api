@@ -38,13 +38,6 @@ JavaScript (ES6) – Logic, API handling, DOM manipulation
 
 OpenWeatherMap API – Real-time weather data
 
-🔗 API Used
-
-OpenWeatherMap – Current Weather API
-
-https://api.openweathermap.org/data/2.5/weather
-
-
 Parameters used:
 
 q → City name
